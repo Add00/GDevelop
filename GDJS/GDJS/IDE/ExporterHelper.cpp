@@ -268,26 +268,9 @@ bool ExporterHelper::ExportCordovaFiles(const gd::Project &project,
   };
 
   auto makeIconsIos = [&getIconFilename]() {
-    std::vector<gd::String> sizes = {"180",
-                                     "60",
-                                     "120",
-                                     "76",
-                                     "152",
-                                     "40",
-                                     "80",
-                                     "57",
-                                     "114",
-                                     "72",
-                                     "144",
-                                     "167",
-                                     "29",
-                                     "58",
-                                     "87",
-                                     "50",
-                                     "20",
-                                     "100",
-                                     "167",
-                                     "1024"};
+    std::vector<gd::String> sizes = {
+        "180", "60",  "120", "76", "152", "40", "80", "57",  "114", "72",
+        "144", "167", "29",  "58", "87",  "50", "20", "100", "167", "1024"};
 
     gd::String output;
     for (auto &size : sizes) {
@@ -315,7 +298,7 @@ bool ExporterHelper::ExportCordovaFiles(const gd::Project &project,
 
   for (std::shared_ptr<gd::PlatformExtension> extension :
        project.GetCurrentPlatform().GetAllPlatformExtensions()) {
-    for (gd::DependencyMetadata dependency : extension->GetAllDependencies()) {
+    for (gd::DependencyMetadata &dependency : extension->GetAllDependencies()) {
       if (dependency.GetDependencyType() == "cordova") {
         gd::String plugin;
         plugin += "<plugin name=\"" + dependency.GetExportName();
